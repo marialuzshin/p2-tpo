@@ -2,8 +2,8 @@
  * 
  */
 /**
- * @author FURY
+ * @author marialuzshin
  *
  */
-module Progra2 {
+module programacion2 {
 }

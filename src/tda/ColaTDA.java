@@ -2,7 +2,7 @@ package tda;
 
 public interface ColaTDA {
 	
-	void incializarCola();
+	void inicializarCola();
 	
 	void acolar(int x);
 	

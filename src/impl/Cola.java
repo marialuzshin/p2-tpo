@@ -8,7 +8,7 @@ public class Cola implements ColaTDA {
 	int indice;
 	
 	@Override
-	public void incializarCola() {
+	public void inicializarCola() {
 		arr = new int[100];
 		indice = 0;
 	}

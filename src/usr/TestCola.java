@@ -65,7 +65,7 @@ public class TestCola {
 
 	private ColaTDA crearCola(int cantidadElementos) {
 		ColaTDA cola = new Cola();
-		cola.incializarCola();
+		cola.inicializarCola();
 		int valorElemento = 1;
 		while (cantidadElementos != 0) {
 			cola.acolar(valorElemento);
@@ -134,6 +134,7 @@ public class TestCola {
 		pilaAux.inicializarPila();
 		ColaTDA colaAux = crearCola(0);
 		int cantidadElementos = 0;
+				
 		
 		while(!cola.colaVacia()) {
 			pilaAux.apilar(cola.primero());
@@ -142,14 +143,16 @@ public class TestCola {
 			cola.desacolar();	
 		}
 		
-		while(!colaAux.colaVacia() && esCapicua) {
-			if (cola.primero() != pilaAux.tope()) {
+		for (int i = 0; i < (cantidadElementos / 2) && esCapicua; i++){
+			if (colaAux.primero() != pilaAux.tope()) {
 				esCapicua = false;
 			} 
 			colaAux.desacolar();
 			pilaAux.desapilar();
 		}
+		
 		return esCapicua;
+		
 	}
 }
 
