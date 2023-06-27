@@ -7,7 +7,6 @@ import tda.DiccionarioMultipleTDA;
 import tda.DiccionarioSimpleTDA;
 import tda.GrafoTDA;
 import tda.PilaTDA;
-import impl.ABB;
 import impl.Cola;
 import impl.Pila;
 import impl.Conjunto;
@@ -16,13 +15,29 @@ import impl.DiccionarioSimple;
 public class Principal {
 
 	public static void main(String[] args) {
+		/* 4) */
+		//Verificar.verificarCuatro();
 		
-		TestPila testPila = new TestPila();
-		testPila.test();
+		//5)
+		//Verificar.verificarCinco();
 		
-		TestCola testCola = new TestCola();
-		testCola.test();
+//		6)
+		Verificar.verificarSeis();
 		
+//		7)
+		Verificar.verificarSiete();
+		
+//		8)
+		Verificar.verificarOcho();
+		
+//		9)
+		Verificar.verificarNueve();
+		
+//		10)
+		Verificar.verificarDiez();
+		
+//		11)
+		Verificar.verificarOnce();
 	}
 	
 	/***
@@ -64,7 +79,9 @@ public class Principal {
 			}
 			cola.desacolar();
 		}
-		cola = colaAux;
+		
+		pasarCola(colaAux, cola);
+		
 		return colaSinRepetidos;
 	}
 	
@@ -124,7 +141,7 @@ public class Principal {
 		pilaAux.inicializarPila();
 		
 		PilaTDA pilaAux2 = new Pila();
-		pilaAux.inicializarPila();
+		pilaAux2.inicializarPila();
 		
 		Cola colaAux = new Cola();
 		colaAux.inicializarCola();
@@ -157,8 +174,8 @@ public class Principal {
 			pilaAux.desapilar();
 		}
 		
-		cola = colaAux;
-		pila = pilaAux2;
+		pasarCola(colaAux, cola);
+		pasarPila(pilaAux2, pila);
 		
 		return conjuntoComun;
 		
@@ -214,7 +231,7 @@ public class Principal {
 		pilaAux.inicializarPila();
 		
 		PilaTDA pilaAux2 = new Pila();
-		pilaAux.inicializarPila();
+		pilaAux2.inicializarPila();
 		
 		DiccionarioSimpleTDA diccionarioSimple = new DiccionarioSimple();
 		diccionarioSimple.inicializarDiccionario();
@@ -222,6 +239,7 @@ public class Principal {
 		while (!pila.pilaVacia()) {
 			int valorPila = pila.tope();
 			pilaAux.apilar(valorPila);
+			
 			int cantidadPila = diccionarioSimple.recuperar(valorPila);
 			if (cantidadPila > 0) {
 				cantidadPila++;
@@ -237,8 +255,6 @@ public class Principal {
 			pilaAux2.apilar(valor);
 			pilaAux.desapilar();
 		}
-		
-		pila = pilaAux2;
 		
 		return diccionarioSimple;
 		
@@ -293,7 +309,7 @@ public class Principal {
 	 * del conjunto para verificar si ya se encuentra en la cola. 
 	 * 
 	 */
-	public static ColaTDA contarElementosPila(DiccionarioMultipleTDA diccionarioMultiple) {
+	public static ColaTDA eliminarRepetidosDM(DiccionarioMultipleTDA diccionarioMultiple) {
 		ColaTDA cola = new Cola();
 		cola.inicializarCola();
 		
@@ -534,6 +550,25 @@ public class Principal {
 		}
 		
 		return (salientes - entrantes);
+	}
+	
+	private static void pasarCola(ColaTDA origen, ColaTDA destino){
+		 while (!origen.colaVacia() ){
+			 destino.acolar(origen.primero());
+			 origen.desacolar() ;
+		 }
+	}
+	
+	/***
+	 * a) Pasar una Pila a otra (dejándola en orden inverso)
+	 * @param origen
+	 * @return
+	 */
+	private static void pasarPila(PilaTDA origen, PilaTDA destino){
+		while (!origen.pilaVacia()) {
+			destino.apilar(origen.tope());
+			origen.desapilar() ;
+		}
 	}
 	
 }

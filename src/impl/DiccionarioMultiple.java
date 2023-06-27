@@ -85,7 +85,7 @@ public class DiccionarioMultiple implements DiccionarioMultipleTDA {
 	public ConjuntoTDA claves() {
 		Conjunto c = new Conjunto();
 		c.inicializarConjunto();
-		for( int i=0; i<cantClaves; i++){
+		for( int i=0; i < cantClaves; i++){
 			c.agregar(elementos[i].clave);
 		}
 		return c;
@@ -93,7 +93,7 @@ public class DiccionarioMultiple implements DiccionarioMultipleTDA {
 
 	private int valor2Indice(Elemento e, int valor) {
 		int i = e.cantValores-1;
-		while(i>=0 && e.valores[i]!=valor) {
+		while(i >= 0 && e.valores[i] != valor) {
 			i--;
 		}
 		return i;
@@ -101,7 +101,7 @@ public class DiccionarioMultiple implements DiccionarioMultipleTDA {
 	
 	private int clave2Indice(int clave) {
 		int i = cantClaves-1;
-		while(i>=0 && elementos[i].clave!=clave) {
+		while(i >= 0 && elementos[i].clave != clave) {
 			i--;
 		}
 		return i;

@@ -40,11 +40,11 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 	public void agregar(int claveAAgregar, int valorAAgregar) {
 		
 		ColaPrioridadTDA colaPrioridadAux = new ColaPrioridad();
-		colaPrioridad.inicializarCola();
+		colaPrioridadAux.inicializarCola();
 			
 		boolean claveEncontrada = false;
 		
-		while(colaPrioridad.colaVacia()) {
+		while(!colaPrioridad.colaVacia()) {
 			int clave = colaPrioridad.prioridad();
 			int valor = colaPrioridad.primero();
 			
@@ -62,7 +62,8 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 		if (!claveEncontrada) {
 			colaPrioridadAux.acolarPrioridad(claveAAgregar, valorAAgregar);
 		} 
-		colaPrioridad = colaPrioridadAux;
+		
+		pasarCola(colaPrioridadAux, colaPrioridad);
 	}
 
 	@Override
@@ -88,7 +89,7 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 		colaPrioridad.inicializarCola();
 	
 			
-		while(colaPrioridad.colaVacia()) {
+		while(!colaPrioridad.colaVacia()) {
 			int clave = colaPrioridad.prioridad();
 			int valor = colaPrioridad.primero();
 			
@@ -100,7 +101,7 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 				
 		} 
 
-		colaPrioridad = colaPrioridadAux;
+		pasarCola(colaPrioridadAux, colaPrioridad);
 	}
 	
 	/***
@@ -127,9 +128,9 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 	public int recuperar(int claveARecuperar) {
 		int valorARecuperar = -1;
 		ColaPrioridadTDA colaPrioridadAux = new ColaPrioridad();
-		colaPrioridad.inicializarCola();
+		colaPrioridadAux.inicializarCola();
 			
-		while(colaPrioridad.colaVacia() && valorARecuperar == -1) {
+		while(!colaPrioridad.colaVacia() && valorARecuperar == -1) {
 			int clave = colaPrioridad.prioridad();
 			int valor = colaPrioridad.primero();
 			
@@ -141,8 +142,9 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 			colaPrioridad.desacolar();
 				
 		} 
-
-		colaPrioridad = colaPrioridadAux;
+	
+		pasarCola(colaPrioridadAux, colaPrioridad);
+		
 		return valorARecuperar;
 	}
 
@@ -167,9 +169,9 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 		conjuntoClaves.inicializarConjunto();
 		
 		ColaPrioridadTDA colaPrioridadAux = new ColaPrioridad();
-		colaPrioridad.inicializarCola();
+		colaPrioridadAux.inicializarCola();
 			
-		while(colaPrioridad.colaVacia()) {
+		while (!colaPrioridad.colaVacia()) {
 			int clave = colaPrioridad.prioridad();
 			int valor = colaPrioridad.primero();
 			
@@ -180,11 +182,16 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 				
 		} 
 
-		colaPrioridad = colaPrioridadAux;
-		
+		pasarCola(colaPrioridadAux, colaPrioridad);
 		
 		return conjuntoClaves;
 	}
 
+	private void pasarCola(ColaPrioridadTDA origen, ColaPrioridadTDA destino) {
+		while (!origen.colaVacia() ){
+			destino.acolarPrioridad(origen.prioridad(), origen.primero());
+			origen.desacolar() ;
+		 }
+	}
 	
 }
