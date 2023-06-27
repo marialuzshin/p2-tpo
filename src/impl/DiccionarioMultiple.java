@@ -22,54 +22,55 @@ public class DiccionarioMultiple implements DiccionarioMultipleTDA {
 
 	@Override
 	public void agregar(int clave, int valor) {
-		int posC = Clave2Indice(clave);
+		int posC = clave2Indice(clave);
 		if(posC == -1) {
-		posC = cantClaves;
-		elementos[posC] = new Elemento();
-		elementos[posC].clave = clave;
-		elementos[posC].cantValores = 0;
-		elementos[posC].valores = new int[100];
-		cantClaves++;
+			posC = cantClaves;
+			elementos[posC] = new Elemento();
+			elementos[posC].clave = clave;
+			elementos[posC].cantValores = 0;
+			elementos[posC].valores = new int[100];
+			cantClaves++;
 		}
+		
 		Elemento e = elementos[posC];
-		int posV = Valor2Indice(e,valor);
+		int posV = valor2Indice(e,valor);
+		
 		if(posV ==-1) {
-		e.valores[e.cantValores] = valor;
-		e.cantValores++;
+			e.valores[e.cantValores] = valor;
+			e.cantValores++;
 		}
-
 	}
 
 	@Override
 	public void eliminar(int clave) {
-		int pos = Clave2Indice(clave);
+		int pos = clave2Indice(clave);
 		if(pos!=-1) {
-		elementos[pos] = elementos[cantClaves-1];
-		cantClaves--;
+			elementos[pos] = elementos[cantClaves-1];
+			cantClaves--;
 		}
 	}
 
 	@Override
 	public void eliminarValor(int clave, int valor) {
-		int posC = Clave2Indice(clave);
+		int posC = clave2Indice(clave);
 		if (posC!=-1) {
-		Elemento e = elementos[posC];
-		int posV = Valor2Indice(e, valor);
-		if (posV !=-1) {
-		e.valores[posV] = e.valores[e.cantValores -1];
-		e.cantValores--;
-		if (e.cantValores==0) {
-		eliminar(clave);
-		}
-		}
+			Elemento e = elementos[posC];
+			int posV = valor2Indice(e, valor);
+			if (posV !=-1) {
+				e.valores[posV] = e.valores[e.cantValores -1];
+				e.cantValores--;
+				if (e.cantValores==0) {
+					eliminar(clave);
+				}
+			}
 		}
 	}
 
 	@Override
 	public ConjuntoTDA recuperar(int clave) {
-		ConjuntoTA c = new ConjuntoTA();
+		Conjunto c = new Conjunto();
 		c.inicializarConjunto();
-		int pos = Clave2Indice(clave);
+		int pos = clave2Indice(clave);
 		if (pos!=-1) {
 		Elemento e= elementos[pos];
 		for(int i=0; i<e.cantValores; i++){
@@ -82,28 +83,27 @@ public class DiccionarioMultiple implements DiccionarioMultipleTDA {
 
 	@Override
 	public ConjuntoTDA claves() {
-		ConjuntoTA c=new ConjuntoTA();
+		Conjunto c = new Conjunto();
 		c.inicializarConjunto();
 		for( int i=0; i<cantClaves; i++){
-		c.agregar(elementos[i].clave);
+			c.agregar(elementos[i].clave);
 		}
 		return c;
 	}
 
-	private int Valor2Indice(Elemento e, int valor) {
+	private int valor2Indice(Elemento e, int valor) {
 		int i = e.cantValores-1;
 		while(i>=0 && e.valores[i]!=valor) {
-		i--;
+			i--;
 		}
 		return i;
 	}
 	
-	private int Clave2Indice(int clave) {
+	private int clave2Indice(int clave) {
 		int i = cantClaves-1;
 		while(i>=0 && elementos[i].clave!=clave) {
-		i--;
+			i--;
 		}
 		return i;
-	}
 	}
 }

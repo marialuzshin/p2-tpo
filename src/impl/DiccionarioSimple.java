@@ -129,11 +129,11 @@ public class DiccionarioSimple implements DiccionarioSimpleTDA {
 		ColaPrioridadTDA colaPrioridadAux = new ColaPrioridad();
 		colaPrioridad.inicializarCola();
 			
-		while(colaPrioridad.colaVacia()) {
+		while(colaPrioridad.colaVacia() && valorARecuperar == -1) {
 			int clave = colaPrioridad.prioridad();
 			int valor = colaPrioridad.primero();
 			
-			if(clave != claveARecuperar) {
+			if(clave == claveARecuperar) {
 				valorARecuperar = valor;
 			} 
 			
